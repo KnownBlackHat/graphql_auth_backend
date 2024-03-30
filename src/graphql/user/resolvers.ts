@@ -7,6 +7,13 @@ const queries = {
             password: payload.password
         })
         return token;
+    },
+    getCurrentLoggedInUser: async(_:any, param:any, context: any) => {
+        if (context && context.user) {
+            const user = await UserService.getUserById(context.user.id);
+            return user;
+        }
+        throw new Error('We have no info about who are you!');
     }
 };
 
